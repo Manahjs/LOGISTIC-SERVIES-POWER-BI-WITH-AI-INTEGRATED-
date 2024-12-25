@@ -1,0 +1,120 @@
+ Real-Time Multi-Source Data Fusion
+import requests
+import pandas as pd
+
+# Example: Fetch real-time traffic and weather data
+def fetch_traffic_data(location):
+    # Dummy function to simulate traffic data
+    return {"traffic_status": "Moderate", "average_speed": 40}
+
+def fetch_weather_data(location):
+    response = requests.get(f"http://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q={location}")
+    return response.json()
+
+def integrate_data(location):
+    traffic_data = fetch_traffic_data(location)
+    weather_data = fetch_weather_data(location)
+    return {**traffic_data, **weather_data}
+
+location = "Hyderabad"
+real_time_data = integrate_data(location)
+print(real_time_data)
+
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+# # Example: Train a predictive maintenance model
+
+def train_maintenance_model():
+    # Simulated data: [engine_temp, tire_pressure, mileage, is_faulty]
+    data = np.array([
+        [85, 32, 15000, 0],
+        [90, 28, 20000, 1],
+        [75, 35, 12000, 0],
+        [95, 30, 25000, 1],
+    ])
+    X, y = data[:, :-1], data[:, -1]
+    model = RandomForestClassifier()
+    model.fit(X, y)
+    return model
+
+def predict_fault(model, input_data):
+    return model.predict([input_data])
+
+model = train_maintenance_model()
+fault_prediction = predict_fault(model, [88, 30, 18000])
+print(f"Fault Prediction: {'Faulty' if fault_prediction[0] == 1 else 'Normal'}")
+
+. Dynamic Route Optimization
+import networkx as nx
+
+# Example: Optimize routes using Dijkstra's Algorithm
+def optimize_route(graph, source, destination):
+    return nx.shortest_path(graph, source=source, target=destination, weight='weight')
+
+# Create a road network graph
+G = nx.DiGraph()
+G.add_edge("A", "B", weight=10)
+G.add_edge("A", "C", weight=15)
+G.add_edge("B", "D", weight=12)
+G.add_edge("C", "D", weight=10)
+
+optimized_path = optimize_route(G, "A", "D")
+print(f"Optimized Route: {optimized_path}")
+
+
+AI-Powered Decision Engine
+
+import gym
+import numpy as np
+
+# Example: Q-learning for fleet management
+def q_learning(env, episodes, alpha, gamma, epsilon):
+    q_table = np.zeros((env.observation_space.n, env.action_space.n))
+    for _ in range(episodes):
+        state = env.reset()
+        done = False
+        while not done:
+            if np.random.uniform(0, 1) < epsilon:
+                action = env.action_space.sample()
+            else:
+                action = np.argmax(q_table[state, :])
+            next_state, reward, done, _ = env.step(action)
+            q_table[state, action] = q_table[state, action] + alpha * (reward + gamma * np.max(q_table[next_state, :]) - q_table[state, action])
+            state = next_state
+    return q_table
+
+env = gym.make('Taxi-v3')
+q_table = q_learning(env, episodes=1000, alpha=0.1, gamma=0.9, epsilon=0.1)
+print("Trained Q-Table:")
+print(q_table)
+
+
+Computer Vision for Vehicle Monitoring
+
+import cv2
+import tensorflow as tf
+
+# Example: Detect vehicle damages
+model = tf.keras.models.load_model('vehicle_damage_model.h5')
+
+def detect_damage(image_path):
+    image = cv2.imread(image_path)
+    image_resized = cv2.resize(image, (224, 224)) / 255.0
+    prediction = model.predict(image_resized[np.newaxis, ...])
+    return "Damaged" if prediction[0][0] > 0.5 else "Normal"
+
+result = detect_damage("vehicle_image.jpg")
+print(f"Vehicle Condition: {result}")
+
+
+Sustainability Optimization
+
+
+def calculate_emissions(fuel_consumed, distance_covered):
+    emission_factor = 2.31  # kg CO2 per liter of fuel
+    return fuel_consumed * emission_factor / distance_covered
+
+emissions = calculate_emissions(fuel_consumed=50, distance_covered=500)
+print(f"Carbon Emissions: {emissions:.2f} kg/km")
+
